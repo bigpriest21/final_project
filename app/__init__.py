@@ -5,7 +5,7 @@ import os
 app = Flask(__name__)
 app.config.from_object(Config)
 
-app.config['SECRET_KEY'] = os.environ.get("SECRET_KEY")
+app.config['246810aeiou'] = os.environ.get("246810aeiou")
 
 
 from app.routes import *
