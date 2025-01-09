@@ -239,36 +239,19 @@
               </div>
             </div><!-- End Info Item -->
 
-            <div class="col-lg-6">
-                <form action="" method="post" class="php-email-form">
                   
-                  <div class="row gy-4">
-                    <div class="col-md-6">
-                      <input type="text" name="name" class="form-control" placeholder="Your Name" required="">
+                  <section class="newsletters" id="newsletter">
+                    <div class="newsletters-card">
+                      <h2>WELCOME TO OUR NEWSLETTER!</h2>
+                      <p>Subscribe  for the latest updates and offers.</p>
+                      <form class="newsletters-form" action="/subscribe" method="POST">
+                        <input type="email" id="email" name="email" required>
+                        <button type="submit" class="submit-btn">Subscribe</button>
+                      </form>
                     </div>
-    
-                    <div class="col-md-6 ">
-                      <input type="email" class="form-control" name="email" placeholder="Your Email" required="">
-                    </div>
-    
-                    <div class="col-md-12">
-                      <input type="text" class="form-control" name="subject" placeholder="Subject" required="">
-                    </div>
-    
-                    <div class="col-md-12">
-                      <textarea class="form-control" name="message" rows="6" placeholder="Message" required=""></textarea>
-                    </div>
-    
-                    <div class="col-md-12 text-center">
-                      <div class="loading">Loading</div>
-                      <div class="error-message"></div>
-                      <div class="sent-message">Your message has been sent. Thank you!</div>
-    
-                      <button type="submit">Send Message</button>
-                    </div>
-                  </div>
-                </form>                
-          </div>
+
+                  </section>
+                  
         </section>
     </main>
 
