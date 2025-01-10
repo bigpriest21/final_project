@@ -6,9 +6,9 @@
   <title>Book Ticket - MasterManagement</title>
 
    <!-- Favicons -->
-<link rel="apple-touch-icon" sizes="180x180" href="{{ url_for('static', filename='images/icon.png') }}">
-<link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='images/icon.png') }}">
-<link rel="icon" type="image/png" sizes="16x16" href="{{ url_for('static', filename='images/icon.png') }}">
+<link rel="apple-touch-icon" sizes="180x180" href="{{ url_for('static', filename='images/efexicon.png') }}">
+<link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='images/efexicon.png') }}">
+<link rel="icon" type="image/png" sizes="16x16" href="{{ url_for('static', filename='images/efexicon.png') }}">
 
 <!-- Fonts -->
 <link href="https://fonts.googleapis.com" rel="preconnect">
@@ -277,11 +277,11 @@ input {
 
           <nav id="navmenu" class="navmenu">
             <ul>
-                <li><a href="#home">Home <br></a></li>
-                <li><a href="#services">Services</a></li>
-                <li><a href="#menu">Menu</a></li>
-                <li><a href="#gallery">Gallery</a></li>
-                <li><a href="#contact">Contact</a></li>
+                <li><a href="{{ url_for ('home') }}">Home <br></a></li>
+                <li><a href="{{ url_for ('home') }}">Services</a></li>
+                <li><a href="{{ url_for ('home') }}">Menu</a></li>
+                <li><a href="{{ url_for ('home') }}">Gallery</a></li>
+                <li><a href="{{ url_for ('home') }}">Contact</a></li>
                 <li><a href="#bookingpage">Book Now</a></li>
 
             </ul>
@@ -336,16 +336,15 @@ input {
     </div>
   
     <div class="charity-options">
-      <h4>Participate in our Humanitarian Mission.</h4>
-      <span style="color: #2e1313; font-size: small; font-weight: lighter;">(Partcipation is optional)</span>
+      <h4>Desired Service.</h4>
       <label>
-        <input type="checkbox" name="charity-mission" value="health"> Health
+        <input type="checkbox" name="charity-mission" value="health"> Private Chef Service
       </label>
       <label>
-        <input type="checkbox" name="charity-mission" value="education"> Education for all
+        <input type="checkbox" name="charity-mission" value="education"> Event Catering
       </label>
       <label>
-        <input type="checkbox" name="charity-mission" value="environment"> Sustainability
+        <input type="checkbox" name="charity-mission" value="environment"> CulinaryLessons
       </label>
     </div>
   
