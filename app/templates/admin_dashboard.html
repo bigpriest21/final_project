@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: Arial, sans-serif;
+        }
+        h1 {
+            color: #343a40;
+            margin-bottom: 30px;
+        }
+        table {
+            background-color: #ffffff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        th {
+            background-color: #007bff;
+            color: #ffffff;
+            font-weight: bold;
+            text-align: center;
+        }
+        td {
+            text-align: center;
+        }
+        .table-container {
+            overflow-x: auto;
+        }
+        #clearAllBookings {
+            margin-top: 20px;
+            background-color: #dc3545;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        #clearAllBookings:hover {
+            background-color: #c82333;
+        }
+        .deleteBooking {
+            background-color: #ffc107;
+            border: none;
+            padding: 5px 10px;
+            font-size: 14px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .deleteBooking:hover {
+            background-color: #e0a800;
+        }
+        #logoutButton {
+            margin-top: 20px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        #logoutButton:hover {
+            background-color: #218838;
+        }
+        #clearAllSubscribers{
+            
+            margin-top: 20px;
+            background-color: #dc3545;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container my-5">
+        <h1 class="text-center">Admin Dashboard</h1>
+        <div class="table-container">
+            <h3>Ticket Bookings</h3>
+            <table class="table table-striped table-bordered">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Phone Number</th>
+                        <th>Booking Reason</th>
+                        <th>Booking Time</th>
+                        <th>Booking Date</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody id="booking-table">
+                    <!-- Data will be populated dynamically -->
+                </tbody>
+            </table>
+            <button id="clearAllBookings">Clear All Bookings</button>
+        </div>
+
+       <!-- Subscribers Table -->
+<div class="table-container mt-5">
+    <h3>Newsletter Subscribers</h3>
+    <table class="table table-striped table-bordered">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Email</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody id="subscribers-table">
+            <!-- Subscribers will be populated here -->
+        </tbody>
+    </table>
+    <button class="btn-danger" id="clearAllSubscribers">Clear All Subscribers</button>
+</div>
+
+<!-- Logout Button -->
+ <div class="text-center">
+            <a href="{{url_for('login')}}" id="logoutButton">Logout</a>
+        </div>
+    </div>
+
+    <script>
+        // Fetch bookings data and populate the table
+        fetch('/bookings-data')
+            .then(response => response.json())
+            .then(data => {
+                const tableBody = document.getElementById('booking-table');
+                data.forEach(booking => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td>${booking[0]}</td>
+                        <td>${booking[1]}</td>
+                        <td>${booking[2]}</td>
+                        <td>${booking[3]}</td>
+                        <td>${booking[4]}</td>
+                        <td>${booking[5]}</td>
+                        <td>${booking[6]}</td>
+                        <td>
+                            <button class="deleteBooking" data-id="${booking[0]}">Delete</button>
+                        </td>
+                    `;
+                    tableBody.appendChild(row);
+                });
+
+                // Add event listeners for delete buttons
+                document.querySelectorAll('.deleteBooking').forEach(button => {
+                    button.addEventListener('click', () => {
+                        const bookingId = button.dataset.id;
+                        fetch(`/admin/delete-booking/${bookingId}`, { method: 'DELETE' })
+                            .then(response => response.json())
+                            .then(result => {
+                                alert(result.message);
+                                location.reload(); // Reload to update the table
+                            });
+                    });
+                });
+
+            })
+            .catch(err => console.error('Error fetching bookings:', err));
+
+        // Event listener for clearing all bookings
+        document.getElementById('clearAllBookings').addEventListener('click', () => {
+            fetch('/admin/clear-bookings', { method: 'DELETE' })
+                .then(response => response.json())
+                .then(result => {
+                    alert(result.message);
+                    location.reload(); // Reload to update the table
+                });
+        });
+</script>
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
